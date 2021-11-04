@@ -1,38 +1,31 @@
-from flask import Flask,jsonify, request
+from flask import Flask, request
+from flask.json import dumps
 
 app = Flask(__name__)
+newbase = []
 
-@app.route('/')
-def main():
-    return 'Перейти по <a href="/query/"> Запросу</a>'
-
-def get(str):
-    name = request.form.get("name")
-    second = request.form.get('second')
-    third = request.form.get('third')
-    str = f'{name=}\n {second=}\n {third=}'
-    #str1 = request.get_json()
-    #str = jsonify(str1)
-    return str 
+def get():
+    return dumps(newbase) 
 
 def post():
-    data = request.get_json()
-    name = data['name']
-    second = data['second']
-    third = data['third']
-    #str = f'{name=}\n{second=}\n{third=}'
-    str = f'"name": "{name}", "second": "{second}", third": {third}'
-    return str
+    name = request.form.get('name')
+    second = request.form.get('second')
+    third = request.form.get('third')
+    new = {
+        'name': name,
+        'second': second, 
+        'third': third,
+    }
+    newbase.append(new)
+    return dumps(new)
 
-@app.route('/query/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def query():
-    #str = '{"name": "asdqw", "second": "qwezx", "third": 12345}'
-    str = ''
     if request.method == 'POST':
-        str = str + post()
+        str = post()
         return str
     if request.method == 'GET':
-        return get(str)
+        return get()
        
 if __name__ == '__main__':
     app.run(debug=True)
