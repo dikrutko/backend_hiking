@@ -42,5 +42,12 @@ def add_news():
     return create_object_from_json(models.News, request.json)
 
 
+@app.route('/news/<pk>', methods=['DELETE'])
+def del_news(pk):
+    models.News.delete().where(models.News.id == int(pk)).execute()
+
+    return jsonify({'status': 'deleted'})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
