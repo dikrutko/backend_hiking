@@ -16,6 +16,9 @@ def create_object_from_json(obj, json):
     """Создание новой новости из json"""
 
     element = dict_to_model(obj, json)
+    print('-'*30)
+    print(json)
+    print('-'*30)
     try:
         element.save()
         element = obj.select().where(obj.id==element.id).get()
