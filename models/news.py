@@ -10,14 +10,3 @@ class News(BaseModel):
     lenght_time = peewee.CharField()
     link_on_registration = peewee.CharField()
     price = peewee.DoubleField(default=0)
-
-    def to_json(self) -> dict:
-        return {
-            'name': self.name,
-            'datetime': self.datetime,
-            'description': self.description,
-            'lenght': self.lenght,
-            'lenght_time': self.lenght_time,
-            'link_on_registration': self.link_on_registration,
-            'price': self.price,
-        }

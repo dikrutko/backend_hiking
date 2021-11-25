@@ -1,46 +1,45 @@
 from flask import Flask, request, jsonify
 from flask.json import dumps
 import models
+from playhouse.shortcuts import model_to_dict, dict_to_model
+from peewee import IntegrityError
+from utils import convert_all_object_to_json, create_object_from_json
+
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
-newbase = []
-
-
-def get():
-    return dumps(newbase) 
-
-
-def post():#add
-    name = request.form.get('name')
-    second = request.form.get('second')
-    third = (request.form.get('third'))
-    new = {
-        'name': name,
-        'second': second,
-        'third': third,
-    }
-    newbase.append(new)
-    return dumps(new)
-
-
-@app.route('/', methods=['GET', 'POST'])
-def query():
-    if request.method == 'POST':
-        return post()
-    if request.method == 'GET':
-        return get()
-
 
 @app.route('/news', methods=['GET'])
 def get_news():
-    result = []
+    """Получение всех новостей"""
+    return convert_all_object_to_json(models.News)
 
-    for news in models.News.select():
-        result.append(news.to_json())
-    
-    return jsonify(result)
+
+@app.route('/areas', methods=['GET'])
+def get_areas():
+    """Получение всех районов"""
+    return convert_all_object_to_json(models.Area)
+
+
+@app.route('/routes', methods=['GET'])
+def get_routes():
+    """Получение всех мрашрутов"""
+    return convert_all_object_to_json(models.Route, exclude=[models.Route.area])
+
+
+@app.route('/routes/<pk>')
+def get_detail_route(pk):
+    """Получение детальной информации о маршруте с id = Pk"""
+    return convert_all_object_to_json(
+        models.Route.select().where(models.Route.id == int(pk))
+    ) 
+
+
+@app.route('/news', methods=['POST'])
+def add_news():
+    """Создание новой новости из json"""
+    return create_object_from_json(models.News, request.json)
 
 
 if __name__ == '__main__':
