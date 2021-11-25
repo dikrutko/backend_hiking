@@ -4,7 +4,7 @@ from models.route import Route
 from models.area import Area
 
 
-class Object(BaseModel):
+class Place(BaseModel):
     name = peewee.CharField(index=True)
     description = peewee.TextField()
     latitude = peewee.FloatField()

@@ -67,25 +67,25 @@ def del_routes(pk):
     return jsonify({'status': 'deleted'})
 
 
-@app.route('/objects', methods=['GET'])
-def get_objects():
+@app.route('/places', methods=['GET'])
+def get_places():
     """Получение всех маршрутов"""
-    return convert_all_object_to_json(models.Object, exclude=[models.Object.area])########## route?
+    return convert_all_object_to_json(models.Place, exclude=[models.Place.area])########## route?
 
-@app.route('/objects/<pk>')
-def get_detail_objects(pk):
+@app.route('/places/<pk>')
+def get_detail_places(pk):
     """Получение детальной информации о маршруте с id = Pk"""
     return convert_all_object_to_json(
-        models.Object.select().where(models.Object.id == int(pk))) 
+        models.Place.select().where(models.Place.id == int(pk))) 
 
-@app.route('/objects', methods=['POST'])
-def add_objects():
+@app.route('/places', methods=['POST'])
+def add_places():
     """Создание нового маршрута из json"""
-    return create_object_from_json(models.Object, request.json)
+    return create_object_from_json(models.Place, request.json)
 
-@app.route('/objects/<pk>', methods=['DELETE'])
-def del_objects(pk):
-    models.Object.delete().where(models.Object.id == int(pk)).execute()
+@app.route('/places/<pk>', methods=['DELETE'])
+def del_places(pk):
+    models.Place.delete().where(models.Place.id == int(pk)).execute()
     """Удаление маршрута из json"""
     return jsonify({'status': 'deleted'})
 

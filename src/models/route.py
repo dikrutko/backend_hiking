@@ -10,6 +10,6 @@ class Route(BaseModel):
     lenght = peewee.DoubleField(index=True)
     height = peewee.DoubleField(index=True)
     hours = peewee.CharField()
-    link_on_youTibe = peewee.CharField()
+    link_on_youTube = peewee.CharField()
     color_route = peewee.CharField(index=True)
     area = peewee.ForeignKeyField(Area, backref='routes')
