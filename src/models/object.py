@@ -1,7 +1,7 @@
 import peewee
 from models.base_model import BaseModel
-from src.models.route import Route
-from src.models.area import Area
+from models.route import Route
+from models.area import Area
 
 
 class Object(BaseModel):
