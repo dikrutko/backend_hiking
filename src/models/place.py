@@ -11,5 +11,4 @@ class Place(BaseModel):
     longitude = peewee.FloatField()
     link_on_youTube = peewee.CharField()
     type_object = peewee.CharField(index=True)
-    route = peewee.ForeignKeyField(Route, backref='areas')
-    area = peewee.ForeignKeyField(Area, backref='routes')
+    route = peewee.ForeignKeyField(Route, backref='places')

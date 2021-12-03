@@ -1,0 +1,26 @@
+{
+    "type": "wall_post_new",
+    "object": {
+        "id": 10,
+        "from_id": -126669581,
+        "owner_id": -126669581,
+        "date": 1638513885,
+        "marked_as_ads": 0,
+        "post_type": "post",
+        "text": "1g23h4ghgh",
+        "can_edit": 1,
+        "created_by": 67561522,
+        "can_delete": 1,
+        "comments": {
+            "count": 0
+        },
+        "is_favorite": false,
+        "donut": {
+            "is_donut": false
+        },
+        "short_text_rate": 0.8,
+        "hash": "PeQJiiDIkOauVWyxtFQMYvsMfQ4"
+    },
+    "group_id": 126669581,
+    "event_id": "69c7df40d60a171bffdbf2bd13f988763a286f2b"
+}
