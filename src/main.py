@@ -4,6 +4,7 @@ import models
 from playhouse.shortcuts import model_to_dict, dict_to_model
 from peewee import IntegrityError
 from utils import convert_all_object_to_json, create_object_from_json
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -34,6 +35,20 @@ def load_news_from_vk():
         return 'hello'
     if request.json.get('type') == 'confirmation':
         return '5aa2565d'
+    if request.json.get('type') == 'wall_post_new':
+        text = request.json['object']['text']
+        name = text.split('\n')[0]
+        
+        models.News(
+            name=name,
+            datetime=datetime.now(),
+            description=text,
+            lenght=1,
+            lenght_time='123',
+            link_on_registration = '1234',
+        ).save()
+
+        return 'ok'
     return 'hello'
 
 
