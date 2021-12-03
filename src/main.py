@@ -26,6 +26,16 @@ def del_news(pk):
     """Удаление новости из json"""
     return jsonify({'status': 'deleted'})
 
+@app.route('/news_vk', methods=['POST'])
+def load_news_from_vk():
+    #{ "type": "confirmation", "group_id": 126669581 }
+    #5aa2565d
+    if not request.json:
+        return 'hello'
+    if request.json.get('type') == 'confirmation':
+        return '5aa2565d'
+    return 'hello'
+
 
 @app.route('/areas', methods=['GET'])
 def get_areas():

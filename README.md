@@ -15,5 +15,5 @@
 - News;
 - Areas;
 - Routes:
-- Objects(глянуть по выводу, сильно громоздко)
+- Objects
 
