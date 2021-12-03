@@ -5,6 +5,7 @@ from playhouse.shortcuts import model_to_dict, dict_to_model
 from peewee import IntegrityError
 from utils import convert_all_object_to_json, create_object_from_json
 from datetime import datetime
+from scripts.parser_coords_on_map import pars_coords
 
 
 app = Flask(__name__)
@@ -27,6 +28,12 @@ def del_news(pk):
     """Удаление новости из json"""
     return jsonify({'status': 'deleted'})
 
+
+@app.route('/coords/<name>', methods=['GET'])
+def get_coords_from_map(name):
+    return pars_coords(name)
+
+
 @app.route('/news_vk', methods=['POST'])
 def load_news_from_vk():
     #{ "type": "confirmation", "group_id": 126669581 }
@@ -36,6 +43,7 @@ def load_news_from_vk():
     if request.json.get('type') == 'confirmation':
         return '5aa2565d'
     if request.json.get('type') == 'wall_post_new':
+        # TODO: написать парсер
         text = request.json['object']['text']
         name = text.split('\n')[0]
         
