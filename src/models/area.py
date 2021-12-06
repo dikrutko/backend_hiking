@@ -7,3 +7,4 @@ class Area(BaseModel):
     description = peewee.TextField()
     latitude = peewee.DoubleField()
     longitude = peewee.DoubleField()
+    picture = peewee.TextField()

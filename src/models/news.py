@@ -10,3 +10,4 @@ class News(BaseModel):
     lenght_time = peewee.CharField(index=True)
     link_on_registration = peewee.CharField()
     price = peewee.DoubleField(default=0, index=True)
+    picture = peewee.TextField()

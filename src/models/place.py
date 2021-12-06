@@ -12,3 +12,4 @@ class Place(BaseModel):
     link_on_youTube = peewee.CharField()
     type_object = peewee.CharField(index=True)
     route = peewee.ForeignKeyField(Route, backref='places')
+    picture = peewee.TextField()

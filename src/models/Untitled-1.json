@@ -1,16 +1,157 @@
 {
     "type": "wall_post_new",
     "object": {
-        "id": 10,
+        "id": 14,
         "from_id": -126669581,
         "owner_id": -126669581,
-        "date": 1638513885,
+        "date": 1638767193,
         "marked_as_ads": 0,
         "post_type": "post",
-        "text": "1g23h4ghgh",
+        "text": "Группа №1 \nГруппа №1 \n8 окт в 19:32 \nНИКОЛАЕВСКИЕ СОПКИ \n \n&#128197; 30 сентября – четверг \n&#9200; Начало в 11:00 \n \nПоднимемся на две главные вершины Гремячей гривы — Николаевскую и Вторую сопки, заглянем на Серебряниковскую видовку (№1). Полюбуемся шикарными видами на Красноярск и окрестности, побываем на оборудованной смотровой площадке. \n \nОбязательно: правильная одежда по погоде и обувь на не скользкой подошве, чай/кофе, перекус. Дети до 18 лет только в сопровождении родителей. \n \n&#8205;Протяжённость – 8 км \nПродолжительность - 3-4 часа \n \n&#128204;ЗАПИСЬ по ссылке: https://travelcenter.timepad.ru/event/1790948/ \n \nБесплатно \n \n#КрасноярскийХайкинг #афиша@krashiking #Красноярск #Хайкинг #ЦентрПутешественников #твоё_время #ГремячаяГрива #ВтораяСопка",
         "can_edit": 1,
         "created_by": 67561522,
         "can_delete": 1,
+        "attachments": [
+            {
+                "type": "photo",
+                "photo": {
+                    "album_id": -7,
+                    "date": 1638767193,
+                    "id": 457239023,
+                    "owner_id": -126669581,
+                    "access_key": "27be625cbf6ff3ceb1",
+                    "post_id": 14,
+                    "sizes": [
+                        {
+                            "height": 50,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=75x50&quality=96&sign=14d0dc45d56c20da29f0bff6b5371273&c_uniq_tag=s8CD14FPh2IhqhREV_vJwIEBEnrWf-ECXwOlo0lCoOE&type=album",
+                            "type": "s",
+                            "width": 75
+                        },
+                        {
+                            "height": 87,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=130x87&quality=96&sign=725afa1e5e37e2938cb6a851a3065f37&c_uniq_tag=Uc5AzMxQW25ZSKYYMj_oEWKMr6q2jIAP2zVPfxM9JsQ&type=album",
+                            "type": "m",
+                            "width": 130
+                        },
+                        {
+                            "height": 403,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=604x403&quality=96&sign=492775c03fe5d44462a4d6c2e6286417&c_uniq_tag=Uak5s1IuLfDazHrqSoCneCqea2REWv-Xj7FBwGqw69g&type=album",
+                            "type": "x",
+                            "width": 604
+                        },
+                        {
+                            "height": 538,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=807x538&quality=96&sign=aca769656be6096cf8a74d318934dd41&c_uniq_tag=iO4A9u8EST-BFFRhoqCbwtuSllpJ_ou0lmIJFQjut7Y&type=album",
+                            "type": "y",
+                            "width": 807
+                        },
+                        {
+                            "height": 854,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=1280x854&quality=96&sign=24ea3c3046242497bfb39635dd7b67f2&c_uniq_tag=VSnMPoMFa_-joPygiPXyAbBPnueX-VVHZD9JyH0aEQw&type=album",
+                            "type": "z",
+                            "width": 1280
+                        },
+                        {
+                            "height": 1648,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=2471x1648&quality=96&sign=16817b1fba5a6adcf8c6af35426d641c&c_uniq_tag=qGc4GptWUKebgXuhFX5dc8TB7HqVWLNC7IToZTpgrvs&type=album",
+                            "type": "w",
+                            "width": 2471
+                        },
+                        {
+                            "height": 87,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=130x87&quality=96&sign=725afa1e5e37e2938cb6a851a3065f37&c_uniq_tag=Uc5AzMxQW25ZSKYYMj_oEWKMr6q2jIAP2zVPfxM9JsQ&type=album",
+                            "type": "o",
+                            "width": 130
+                        },
+                        {
+                            "height": 133,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=200x133&quality=96&sign=743cfff2357197ffd08dbc175b535bc9&c_uniq_tag=yT7q2B5a4At1sBDhjVHWqU83zxLuZMIwS-mUE5Grqvo&type=album",
+                            "type": "p",
+                            "width": 200
+                        },
+                        {
+                            "height": 213,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=320x213&quality=96&sign=62b271a99b1c7613f498d96d543ad526&c_uniq_tag=lSQBuKsqiaFjoMDd2ZIShn3ItmAgKjLKLMPM1NOFuSA&type=album",
+                            "type": "q",
+                            "width": 320
+                        },
+                        {
+                            "height": 340,
+                            "url": "https://sun9-31.userapi.com/impg/7H_4PbXswfeFXTAYaqzligFbDy3bLIhJhhcuSw/CwbOv2g-tbA.jpg?size=510x340&quality=96&sign=9cd8af2a5b702a7010208c73f31e0bcb&c_uniq_tag=1LUjE8oXWd9b9KM82BiN6X_d7SlQlm6WdZ2zTSEoz1c&type=album",
+                            "type": "r",
+                            "width": 510
+                        }
+                    ],
+                    "text": "",
+                    "user_id": 100,
+                    "has_tags": false
+                }
+            },
+            {
+                "type": "link",
+                "link": {
+                    "url": "https://travelcenter.timepad.ru/event/1790948/",
+                    "title": "НИКОЛАЕВСКИЕ СОПКИ / События на TimePad.ru",
+                    "description": "Туристско-экскурсионный маршрут по Гремячей гриве.",
+                    "target": "internal",
+                    "photo": {
+                        "album_id": -27,
+                        "date": 1638767193,
+                        "id": 457370487,
+                        "owner_id": 2000000876,
+                        "sizes": [
+                            {
+                                "height": 805,
+                                "url": "https://sun9-27.userapi.com/BkjiCPBZznYBV9U3_K0JL__Ov5YbLJ9VszfUYQ/aC4WzkN2cgg.jpg",
+                                "type": "temp",
+                                "width": 1074
+                            },
+                            {
+                                "height": 56,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=75x35&quality=96&crop=22,0,1029,480&sign=4caf03f338e23f983e2422d5c388a7a0&c_uniq_tag=W9yf4Hxr0RgHZwI8IfE1M7RCXjETg8rEDSnCYTr6PEk&type=share",
+                                "type": "s",
+                                "width": 75
+                            },
+                            {
+                                "height": 97,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=130x80&quality=96&crop=147,0,780,480&sign=da5b15d5265e9e4c7e160bef17ad2021&c_uniq_tag=iqKbFOl5TTic93hzjZalfuyCY0KwikpXVeUB43eQpXM&type=share",
+                                "type": "m",
+                                "width": 130
+                            },
+                            {
+                                "height": 112,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=150x80&quality=96&crop=87,0,900,480&sign=33eccdb658ecd47b6849eb6ab782c324&c_uniq_tag=5U0Tw4QDD_KTbZiL74WFX420U3d92JhnwFMM9dodeQ8&type=share",
+                                "type": "x",
+                                "width": 150
+                            },
+                            {
+                                "height": 195,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=260x140&quality=96&crop=91,0,891,480&sign=922fe5aa3c14eddcd714b4a2ff333430&c_uniq_tag=XEh5SDjwv5TyOIx14Wb2P1qLn3Ws-x_akLa0ED2Wgms&type=share",
+                                "type": "p",
+                                "width": 260
+                            },
+                            {
+                                "height": 240,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=537x240&quality=96&sign=d02e26eefc39ff5474474db332ee58ce&c_uniq_tag=WV0NUgffrAuPJt8uBFopJdKM5aEwPKwOI_McyodmvP8&type=share",
+                                "type": "l",
+                                "width": 537
+                            },
+                            {
+                                "height": 480,
+                                "url": "https://sun9-81.userapi.com/impg/IkRf6ffI7-wPE3AliszcKhJEmQvx_dVVNsoEKA/2pOrha9DMM8.jpg?size=1074x480&quality=96&sign=22327b84a31f590453b0e0cab5972f6d&c_uniq_tag=rZtIBWd91zDI8U4lp-BpHIJ-omqICwavC9pZgwJGUCY&type=share",
+                                "type": "k",
+                                "width": 1074
+                            }
+                        ],
+                        "text": "",
+                        "user_id": 100,
+                        "has_tags": false
+                    },
+                    "is_favorite": false
+                }
+            }
+        ],
         "comments": {
             "count": 0
         },
@@ -19,8 +160,9 @@
             "is_donut": false
         },
         "short_text_rate": 0.8,
-        "hash": "PeQJiiDIkOauVWyxtFQMYvsMfQ4"
+        "carousel_offset": 0,
+        "hash": "qrLtsh4Ryn_3SR7BkIwA6DisSXU"
     },
     "group_id": 126669581,
-    "event_id": "69c7df40d60a171bffdbf2bd13f988763a286f2b"
+    "event_id": "27940fdc176c1af20bdef46884efd63cd87e78dd"
 }

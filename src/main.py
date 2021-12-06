@@ -2,10 +2,11 @@ from flask import Flask, request, jsonify
 from flask.json import dumps
 import models
 from playhouse.shortcuts import model_to_dict, dict_to_model
-from peewee import IntegrityError
+from peewee import DateTimeField, IntegrityError
 from utils import convert_all_object_to_json, create_object_from_json
 from datetime import datetime
 from scripts.parser_coords_on_map import pars_coords
+import re
 
 
 app = Flask(__name__)
@@ -45,20 +46,107 @@ def load_news_from_vk():
     if request.json.get('type') == 'wall_post_new':
         # TODO: написать парсер
         text = request.json['object']['text']
-        name = text.split('\n')[0]
+        # Парсим информацию 
+        # Достаем название
+        text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
+        text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
+        if (text_name1 != ' ' or text_name2 != ' '):
+            if (text_name1 != ' '):
+                name = text_name1
+            elif (text_name2 != ' '):
+                name = text_name2
+            name = name[0]
+        #name = text.split('\n')[0]
         
+        # Достаем дату и время
+        date_event = re.findall(r'\d{1,}\s\w+\s.\s\w+',text)
+        date_split = date_event[0].split()
+        day = date_split[0]
+        mounth = date_split[1]
+        if (mounth == "января"):
+            moun = "01"
+        elif (mounth == "февраля"):
+            moun = "02"
+        elif (mounth == "марта"):
+            moun = "03"
+        elif (mounth == "апреля"):
+            moun = "04"
+        elif (mounth == "мая"):
+            moun = "05"
+        elif (mounth == "июня"):
+            moun = "06"
+        elif (mounth == "июля"):
+            moun = "07"
+        elif (mounth == "августа"):
+            moun = "08"
+        elif (mounth == "сентября"):
+            moun = "09"
+        elif (mounth == "октября"):
+            moun = "10"
+        elif (mounth == "ноября"):
+            moun = "11"
+        elif (mounth == "декабря"):
+            moun = "12"
+        year = DateTimeField.now().year
+        time_event = re.findall(r'\d{2}\:\d{2}', text)
+        time = time_event[0]
+        datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
+
+        # Описание
+        description = text.split('\n')[5] + '\n' + text.split('\n')[7]
+
+        # Длину маршрута (протяженность), км
+        lenght_event = re.findall(r'\w{13}\:\s\d{1,}\w{2}', text)
+        len_split = lenght_event[0].split()
+        len_num = re.findall(r'\d{1,}', len_split[1])
+        lenght = len_num[0]
+
+        # Продолжительность, ч
+        lenght_time_event = re.findall(r'\w{17}\:\s\d{1,}\w{1}', text)
+        len_time_split = lenght_time_event[0].split()
+        len_time_num = re.findall(r'\d{1,}', len_time_split[1])
+        lenght_time = len_time_num[0]
+
+        # Ссылку на регистриацию
+        link_event = re.findall(r'https://\S+', text)
+        link = link_event[0]
+
+        # Цену
+        price_event = re.findall(r'Бесплатно', text)
+        if price_event[0] == 'Бесплатно':
+            price = 0
+
+        jsonArray1 = request.json['attachments']
+        for i in jsonArray1:
+            # Вытаскиваем картинку из поста
+            if jsonArray1[i].get('type') == 'photo':
+                jsonArray2 = request.json['sizes']
+                for j in jsonArray2:
+                    if jsonArray2[j].get('type') == 'x':
+                        picture = jsonArray2[j].get('url')
+            # вытаскиваем ссылку на регистрацию
+            if jsonArray1[i].get('type') == 'link':
+                link = jsonArray1[i].get('url')
+
         models.News(
             name=name,
-            datetime=datetime.now(),
-            description=text,
-            lenght=1,
-            lenght_time='123',
-            link_on_registration = '1234',
+            datetime=datetime,
+            description=description,
+            lenght=lenght,
+            lenght_time=lenght_time,
+            link_on_registration = link,
+            price = price,
+            picture = picture,
         ).save()
 
         return 'ok'
     return 'hello'
-
+###################################################################################
+@app.route('/news_vk', methods=['GET'])
+def get_news_from_vk():
+    """Получение всех новостей из вк"""
+    return convert_all_object_to_json(models.News)
+###################################################################################
 
 @app.route('/areas', methods=['GET'])
 def get_areas():
@@ -103,7 +191,7 @@ def del_routes(pk):
 @app.route('/places', methods=['GET'])
 def get_places():
     """Получение всех маршрутов"""
-    return convert_all_object_to_json(models.Place, exclude=[models.Place.area])########## route?
+    return convert_all_object_to_json(models.Place, exclude=[models.Place.area])
 
 @app.route('/places/<pk>')
 def get_detail_places(pk):
