@@ -46,6 +46,14 @@ def load_news_from_vk():
     if request.json.get('type') == 'wall_post_new':
         # TODO: написать парсер
         text = request.json['object']['text']
+        name =""
+        datetime =""
+        description =""
+        lenght =""
+        lenght_time =""
+        link =""
+        price =""
+        picture =""
         # Парсим информацию 
         # Достаем название
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
@@ -127,17 +135,17 @@ def load_news_from_vk():
             # вытаскиваем ссылку на регистрацию
             if jsonArray1[i].get('type') == 'link':
                 link = jsonArray1[i].get('url')
-
-        models.News(
-            name=name,
-            datetime=datetime,
-            description=description,
-            lenght=lenght,
-            lenght_time=lenght_time,
-            link_on_registration = link,
-            price = price,
-            picture = picture,
-        ).save()
+        if (name != "" and datetime != "" and description != "" and lenght != "" and lenght_time != "" and link != "" and price != "" and picture != ""):
+            models.News(
+                name=name,
+                datetime=datetime,
+                description=description,
+                lenght=lenght,
+                lenght_time=lenght_time,
+                link_on_registration = link,
+                price = price,
+                picture = picture,
+            ).save()
 
         return 'ok'
     return 'hello'
