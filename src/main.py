@@ -47,7 +47,7 @@ def load_news_from_vk():
         # TODO: написать парсер
         text = request.json['object']['text']
         name =""
-        datetime =""
+        _datetime =""
         description =""
         lenght =""
         lenght_time =""
@@ -71,48 +71,36 @@ def load_news_from_vk():
         date_split = date_event[0].split()
         day = date_split[0]
         mounth = date_split[1]
-        if (mounth == "января"):
-            moun = "01"
-        elif (mounth == "февраля"):
-            moun = "02"
-        elif (mounth == "марта"):
-            moun = "03"
-        elif (mounth == "апреля"):
-            moun = "04"
-        elif (mounth == "мая"):
-            moun = "05"
-        elif (mounth == "июня"):
-            moun = "06"
-        elif (mounth == "июля"):
-            moun = "07"
-        elif (mounth == "августа"):
-            moun = "08"
-        elif (mounth == "сентября"):
-            moun = "09"
-        elif (mounth == "октября"):
-            moun = "10"
-        elif (mounth == "ноября"):
-            moun = "11"
-        elif (mounth == "декабря"):
-            moun = "12"
-        year = DateTimeField.now().year
+        moun = {
+            "янв": '01',
+            "фев": '02',
+            "мар": '03',
+            "апр": '04',
+            "мая": '05',
+            "июн": '06',
+            "июл": '07',
+            "авг": '08',
+            "сен": '09',
+            "окт": '10',
+            "ноя": '11',
+            "дек": '12'
+        }[mounth[:3]]
+        year = datetime.now().year
         time_event = re.findall(r'\d{2}\:\d{2}', text)
         time = time_event[0]
-        datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
+        _datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
 
         # Описание
         description = text.split('\n')[5] + '\n' + text.split('\n')[7]
 
         # Длину маршрута (протяженность), км
-        lenght_event = re.findall(r'\w{13}\:\s\d{1,}\w{2}', text)
-        len_split = lenght_event[0].split()
-        len_num = re.findall(r'\d{1,}', len_split[1])
+        lenght_event = re.findall(r'[пП]ротяж[её]нность\W{1,3}\d+', text)
+        len_num = re.findall(r'\d+', lenght_event[0])
         lenght = len_num[0]
 
         # Продолжительность, ч
-        lenght_time_event = re.findall(r'\w{17}\:\s\d{1,}\w{1}', text)
-        len_time_split = lenght_time_event[0].split()
-        len_time_num = re.findall(r'\d{1,}', len_time_split[1])
+        lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
+        len_time_num = re.findall(r'\d+', lenght_time_event[0])
         lenght_time = len_time_num[0]
 
         # Ссылку на регистриацию
@@ -124,21 +112,21 @@ def load_news_from_vk():
         if price_event[0] == 'Бесплатно':
             price = 0
 
-        jsonArray1 = request.json['attachments']
-        for i in jsonArray1:
-            # Вытаскиваем картинку из поста
-            if jsonArray1[i].get('type') == 'photo':
-                jsonArray2 = request.json['sizes']
-                for j in jsonArray2:
-                    if jsonArray2[j].get('type') == 'x':
-                        picture = jsonArray2[j].get('url')
-            # вытаскиваем ссылку на регистрацию
-            if jsonArray1[i].get('type') == 'link':
-                link = jsonArray1[i].get('url')
-        if (name != "" and datetime != "" and description != "" and lenght != "" and lenght_time != "" and link != "" and price != "" and picture != ""):
+        pic1 =''
+        if attachments := request.json['object'].get('attachments'):
+            for attach in attachments:
+                if attach['type'] != 'photo':
+                    continue
+                photo = attach['photo']
+                for size in photo['sizes']:
+                    if size['type'] != 'x':
+                        continue
+                    picture = size['url']
+                    print(picture)
+        if (name != "" and _datetime != "" and description != "" and lenght != "" and lenght_time != "" and link != "" and price != "" and picture != ""):
             models.News(
                 name=name,
-                datetime=datetime,
+                datetime=_datetime,
                 description=description,
                 lenght=lenght,
                 lenght_time=lenght_time,
@@ -146,10 +134,13 @@ def load_news_from_vk():
                 price = price,
                 picture = picture,
             ).save()
+        else:
+            print(all([name, _datetime, description, lenght, lenght_time, link, price, picture]))
+            print([name, _datetime, description, lenght, lenght_time, link, price, picture])
 
         return 'ok'
     return 'hello'
-###################################################################################
+################################################################################### тут я пыталась получить инфу из таблицы новостей, но не нужно(можно прост через news оставить)
 @app.route('/news_vk', methods=['GET'])
 def get_news_from_vk():
     """Получение всех новостей из вк"""
@@ -214,7 +205,7 @@ def add_places():
 
 @app.route('/places/<pk>', methods=['DELETE'])
 def del_places(pk):
-    models.Place.delete().where(models.Place.id == int(pk)).execute()
+    models.на.delete().where(models.Place.id == int(pk)).execute()
     """Удаление маршрута из json"""
     return jsonify({'status': 'deleted'})
 

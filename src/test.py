@@ -1,7 +1,7 @@
 import re
 from datetime import datetime
 
-text = "ПЕЩЕРНЫЙ ЛОГ \n \n&#128197; 4 декабря - суббота \n&#9200;Начало в 10:00 \n \nПолностью пройдем небольшую круговую тропу \"Прогулочная\" на Гремячей Гриве, зайдем в Пещерный лог, посмотрим на Монастырский грот и пещеру Карман. \n \nОБЯЗАТЕЛЬНО: правильная одежда по погоде и обувь на нескользкой подошве, чай/кофе, перекус. \n \nПротяженность: 5км \nПродолжительность: 3ч \n \n&#128204;ЗАПИСЬ по ссылке откроется в 19:00: https://travelcenter.timepad.ru/event/1858378/ \n \nБесплатно \n \n#афиша@krashiking #центрпутешественников #КрасноярскийХайкинг #твоё_время #Красноярск #ГремячаяГрива #ПещерныйЛог"
+text = "ПЕЩЕРНЫЙ ЛОГ \n \n&#128197; 4 декабря - суббота \n&#9200;Начало в 10:00 \n \nПолностью пройдем небольшую круговую тропу \"Прогулочная\" на Гремячей Гриве, зайдем в Пещерный лог, посмотрим на Монастырский грот и пещеру Карман. \n \nОБЯЗАТЕЛЬНО: правильная одежда по погоде и обувь на нескользкой подошве, чай/кофе, перекус. \n \nПротяженность - 5км \nПродолжительность: 3ч \n \n&#128204;ЗАПИСЬ по ссылке откроется в 19:00: https://travelcenter.timepad.ru/event/1858378/ \n \nБесплатно \n \n#афиша@krashiking #центрпутешественников #КрасноярскийХайкинг #твоё_время #Красноярск #ГремячаяГрива #ПещерныйЛог"
 
 text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
 text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
@@ -19,30 +19,20 @@ print(date_split)
 date = date_split[0]
 print(date)
 mounth = date_split[1]
-if (mounth == "января"):
-    moun = "01"
-elif (mounth == "февраля"):
-    moun = "02"
-elif (mounth == "марта"):
-    moun = "03"
-elif (mounth == "апреля"):
-    moun = "04"
-elif (mounth == "мая"):
-    moun = "05"
-elif (mounth == "июня"):
-    moun = "06"
-elif (mounth == "июля"):
-    moun = "07"
-elif (mounth == "августа"):
-    moun = "08"
-elif (mounth == "сентября"):
-    moun = "09"
-elif (mounth == "октября"):
-    moun = "10"
-elif (mounth == "ноября"):
-    moun = "11"
-elif (mounth == "декабря"):
-    moun = "12"
+moun = {
+            "января": '01',
+            "февраля": '02',
+            "марта": '03',
+            "апреля": '04',
+            "мая": '05',
+            "июня": '06',
+            "июля": '07',
+            "августа": '08',
+            "сентября": '09',
+            "октября": '10',
+            "ноября": '11',
+            "декабря":'12'
+        }[mounth]
 print(moun)
 year = datetime.now().year
 print (year)
@@ -56,17 +46,17 @@ descript = text.split('\n')[5] + '\n' + text.split('\n')[7]
 print(descript)
 
 
-lenght_event = re.findall(r'\w{13}\:\s\d{1,}\w{2}', text)
-len_split = lenght_event[0].split()
-len_num = re.findall(r'\d{1,}', len_split[1])
-# протяженность в км
-print (len_num[0])
+lenght_event = re.findall(r'[пП]ротяженность\W{1,3}\d+', text)
+print(lenght_event[0])
+len_num = re.findall(r'\d+', lenght_event[0])
+print(len_num[0])
 
-lenght_time_event = re.findall(r'\w{17}\:\s\d{1,}\w{1}', text)
-len_time_split = lenght_time_event[0].split()
-len_time_num = re.findall(r'\d{1,}', len_time_split[1])
+
+lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
+len_time_num = re.findall(r'\d+', lenght_time_event[0])
+lenght_time = len_time_num[0]
 # продолжительность в ч
-print (len_time_num[0])
+print (lenght_time)
 
 link_event = re.findall(r'https://\S+', text)
 print(link_event[0])
