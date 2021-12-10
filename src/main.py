@@ -112,7 +112,6 @@ def load_news_from_vk():
         if price_event[0] == 'Бесплатно':
             price = 0
 
-        pic1 =''
         if attachments := request.json['object'].get('attachments'):
             for attach in attachments:
                 if attach['type'] != 'photo':
@@ -122,8 +121,7 @@ def load_news_from_vk():
                     if size['type'] != 'x':
                         continue
                     picture = size['url']
-                    print(picture)
-        if (name != "" and _datetime != "" and description != "" and lenght != "" and lenght_time != "" and link != "" and price != "" and picture != ""):
+        if name and _datetime and description and lenght and lenght_time and link and price and picture:
             models.News(
                 name=name,
                 datetime=_datetime,
@@ -134,18 +132,9 @@ def load_news_from_vk():
                 price = price,
                 picture = picture,
             ).save()
-        else:
-            print(all([name, _datetime, description, lenght, lenght_time, link, price, picture]))
-            print([name, _datetime, description, lenght, lenght_time, link, price, picture])
 
         return 'ok'
     return 'hello'
-################################################################################### тут я пыталась получить инфу из таблицы новостей, но не нужно(можно прост через news оставить)
-@app.route('/news_vk', methods=['GET'])
-def get_news_from_vk():
-    """Получение всех новостей из вк"""
-    return convert_all_object_to_json(models.News)
-###################################################################################
 
 @app.route('/areas', methods=['GET'])
 def get_areas():
