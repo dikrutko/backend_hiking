@@ -1,5 +1,5 @@
 from utils import convert_all_object_to_json, create_object_from_json
-from plugins.area.models import News
+from plugins.news.models import News
 from flask import request, jsonify
 from plugins.core.plugin_manager import PluginManager
 import re

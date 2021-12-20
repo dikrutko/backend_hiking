@@ -1,6 +1,6 @@
 import peewee
 from plugins.core.base_model import BaseModel
-from plugins.route.models import Area
+from plugins.area.models import Area
 
 
 class Route(BaseModel):
