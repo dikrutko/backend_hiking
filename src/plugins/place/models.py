@@ -1,6 +1,6 @@
 import peewee
-from models.base_model import BaseModel
-from models.area import Area
+from plugins.core.base_model import BaseModel
+from plugins.area.models import Area
 
 
 class Place(BaseModel):

@@ -10,5 +10,5 @@ def pars_coords(name):
         if child.nodeType == child.ELEMENT_NODE:
             latValue = round(float(child.getAttribute("lat")),6)
             lonValue = round(float(child.getAttribute("lon")),6)
-            result += f'geoPoints.add(new GeoPoint({latValue}), ({lonValue}));<br>'
+            result += f'geoPoints.add(GeoPoint({latValue}, {lonValue}))<br>'
     return result
