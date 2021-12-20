@@ -18,7 +18,7 @@ class PluginManager(metaclass=SingletonMeta):
 
     def add_moudles(self):
         models = []
-        paths = [str(x).split('\\')[-1] for x in Path('.\\plugins').iterdir() if x.is_dir()]
+        paths = [str(x).split('/')[-1] for x in Path('./plugins').iterdir() if x.is_dir()]
         for path in paths:
             if path == 'core':
                 continue
