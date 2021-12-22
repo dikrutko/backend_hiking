@@ -7,5 +7,7 @@ class User(BaseModel):
     date = peewee.DateField(index=True)
     phone = peewee.CharField(index=True)
     email = peewee.CharField(index=True)
+    password = peewee.CharField()
+    checkPass = peewee.CharField()
     photo = peewee.TextField()
-    sub = peewee.CharField()
+    promo = peewee.CharField()
