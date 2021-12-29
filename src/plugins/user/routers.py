@@ -8,6 +8,7 @@ from string import digits
 from random import choices
 from peewee import DoesNotExist
 from requests import post
+from os import getenv
 
 
 manager = PluginManager(None)
@@ -20,9 +21,9 @@ def send_code(user):
     text = f'Пожалуйста, подтвердите вашу почту: {url}/activations/{code}'
     
     send = post(
-        "https://api.mailgun.net/v3/sandboxecdcc22b06f64e609c6bf7778f859b76.mailgun.org/messages",
-        auth=("api", "318144d7c5abb939d93600df500a4ed7-cac494aa-4b798db6"),
-        data={"from": "Excited User <mailgun@sandboxecdcc22b06f64e609c6bf7778f859b76.mailgun.org>",
+        "https://api.mailgun.net/v3/.mailgun.org/messages",
+        auth=("api", getenv('MAILGUN_API_KEY')),
+        data={"from": f"Excited User <{getenv('MAILGUN_MAIL')}>",
               "to": [user.email],
               "subject": 'Подверждение почты',
               "text": text}
