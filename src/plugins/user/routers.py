@@ -37,34 +37,34 @@ def login():
     try:
         user: User = User.get(User.email == json.get('email'))
     except DoesNotExist:
-        return jsonify({'error': 'неправильный логин или пароль'})
+        return jsonify({'error': 'Неправильный логин или пароль'})
     if user.password != md5(json['password'].encode()).hexdigest():
-        return jsonify({'error': 'неправильный логин или пароль'})
-    if not user.active:
-        return jsonify({'error': 'подтвердите почту'}) 
+        return jsonify({'error': 'Неправильный логин или пароль'})
+    #if not user.active:
+     #   return jsonify({'error': 'Подтвердите почту'}) 
 
     return model_to_dict(user, backrefs=True)
 
 
 @manager.route('/users', methods=['GET'])
 def get_users():
-    """Получение всех районов"""
+    """Получение всех пользователей"""
     return convert_all_object_to_json(User)
 
 
 @manager.route('/registration', methods=['POST'])
 def add_users():
-    """Создание нового района из json"""
+    """Создание нового пользователя из json"""
     json = request.json
     json['active'] = False
 
     if json.get('password', '') != json.pop('check_password'):
-        return jsonify({'error': 'пароли не совпадают'})
+        return jsonify({'error': 'Пароли не совпадают'})
 
     json['password'] = md5(json['password'].encode()).hexdigest()
     
     if User.select().where(User.email == json.get('email')).exists():
-        return jsonify({'error': 'пользователь с такой почтой уже существует'})
+        return jsonify({'error': 'Пользователь с такой почтой уже существует'})
 
     result = create_object_from_json(User, request.json)
 
