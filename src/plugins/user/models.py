@@ -8,6 +8,16 @@ class User(BaseModel):
     phone = peewee.CharField(index=True)
     email = peewee.CharField(index=True)
     password = peewee.CharField()
-    checkPass = peewee.CharField()
     photo = peewee.TextField()
-    promo = peewee.CharField()
+    active = peewee.BooleanField(default=False)
+
+
+class CodeActications(BaseModel):
+    user = peewee.ForeignKeyField(User, backref='code', unique=True)
+    code = peewee.CharField(max_length=4)
+
+
+__all__ = [
+    'User',
+    'CodeActications',
+]

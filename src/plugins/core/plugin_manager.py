@@ -29,7 +29,11 @@ class PluginManager(metaclass=SingletonMeta):
             model = getattr(model, f'{path}') # module_name
             __import__(f'plugins.{path}.routers')
             model = getattr(model, 'models') # models
-            models.append(getattr(model, path.title()))
+            if hasattr(model, '__all__'):
+                for name in getattr(model, '__all__'):
+                    models.append(getattr(model, name))
+            else:
+                models.append(getattr(model, path.title()))
 
         db.connect()
         db.create_tables(models)
