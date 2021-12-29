@@ -21,7 +21,7 @@ def send_code(user):
     text = f'Пожалуйста, подтвердите вашу почту: {url}/activations/{code}'
     
     send = post(
-        "https://api.mailgun.net/v3/.mailgun.org/messages",
+        f'https://api.mailgun.net/v3/{getenv("MAILGUN_MAIL").split("@")[1]}/messages',
         auth=("api", getenv('MAILGUN_API_KEY')),
         data={"from": f"Excited User <{getenv('MAILGUN_MAIL')}>",
               "to": [user.email],
