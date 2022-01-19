@@ -14,6 +14,17 @@ manager = PluginManager(None)
 def get_coords_from_map(name):
     return pars_coords(name)
 
+@manager.route('/news', methods=['GET'])
+def get_news():
+    """Получение всех новостей"""
+    return convert_all_object_to_json(News)
+
+
+@manager.route('/news/<pk>', methods=['DELETE'])
+def del_news(pk):
+    News.delete().where(News.id == int(pk)).execute()
+    """Удаление новости из json"""
+    return jsonify({'status': 'deleted'})
 
 @manager.route('/news_vk', methods=['POST'])
 def load_news_from_vk():
