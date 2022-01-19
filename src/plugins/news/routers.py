@@ -123,6 +123,6 @@ def load_news_from_vk():
                 price = price,
                 picture = picture,
             ).save()
-
+            return create_object_from_json(News, request.json)
         return 'ok'
     return 'hello'
