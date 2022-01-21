@@ -28,7 +28,8 @@ def del_news(pk):
 def load_news_from_vk():
     #{ "type": "confirmation", "group_id": 126669581 }
     #5aa2565d
-    #{ "type": "confirmation", "group_id": 85615754 }
+    # для Красноярского Хайкинга:
+    # { "type": "confirmation", "group_id": 85615754 }
     # 0b646ebd
     if not request.json:
         return 'hello'
