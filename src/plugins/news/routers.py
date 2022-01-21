@@ -28,10 +28,12 @@ def del_news(pk):
 def load_news_from_vk():
     #{ "type": "confirmation", "group_id": 126669581 }
     #5aa2565d
+    #{ "type": "confirmation", "group_id": 85615754 }
+    # 0b646ebd
     if not request.json:
         return 'hello'
     if request.json.get('type') == 'confirmation':
-        return '5aa2565d'
+        return '0b646ebd'
     if request.json.get('type') == 'wall_post_new':
         # TODO: написать парсер
         text = request.json['object']['text']
