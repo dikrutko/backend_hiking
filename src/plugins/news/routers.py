@@ -130,5 +130,6 @@ def load_news_from_vk():
                 picture = picture,
             ).save()
             #return create_object_from_json(News, request.json)
-        return 'ok', name, _datetime, description, lenght, lenght_time,link,price, picture
+            return name + _datetime + description + lenght + lenght_time + link + price + picture
+        return 'ok'
     return 'hello'
