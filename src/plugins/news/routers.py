@@ -1,12 +1,10 @@
-from utils import convert_all_object_to_json, create_object_from_json
 from plugins.news.models import News
 from flask import request, jsonify
 from plugins.core.plugin_manager import PluginManager
 import re
 from scripts.parser_coords_on_map import pars_coords
 from datetime import datetime
-
-
+from utils import convert_all_object_to_json, create_object_from_json
 
 manager = PluginManager(None)
 
@@ -55,6 +53,7 @@ def load_news_from_vk():
             elif (text_name2 != ' '):
                 name = text_name2
             name = name[0]
+        print(name)
         #name = text.split('\n')[0]
         
         # Достаем дату и время
@@ -80,28 +79,34 @@ def load_news_from_vk():
         time_event = re.findall(r'\d{2}\:\d{2}', text)
         time = time_event[0]
         _datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
+        print(_datetime)
 
         # Описание
         description = text.split('\n')[5] + '\n' + text.split('\n')[7]
+        print(description)
 
         # Длину маршрута (протяженность), км
         lenght_event = re.findall(r'[пП]ротяж[её]нность\W{1,3}\d+', text)
         len_num = re.findall(r'\d+', lenght_event[0])
         lenght = len_num[0]
+        print(lenght)
 
         # Продолжительность, ч
         lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
         len_time_num = re.findall(r'\d+', lenght_time_event[0])
         lenght_time = len_time_num[0]
+        print(lenght_time)
 
         # Ссылку на регистриацию
         link_event = re.findall(r'https://\S+', text)
         link = link_event[0]
+        print(link)
 
         # Цену
         price_event = re.findall(r'Бесплатно', text)
         if price_event[0] == 'Бесплатно':
             price = 0
+        print(price)
 
         if attachments := request.json['object'].get('attachments'):
             for attach in attachments:
@@ -112,6 +117,7 @@ def load_news_from_vk():
                     if size['type'] != 'x':
                         continue
                     picture = size['url']
+                    print(picture)
         if name and _datetime and description and lenght and lenght_time and link and price and picture:
             News(
                 name=name,
