@@ -105,7 +105,9 @@ def load_news_from_vk():
         # Цену
         price_event = re.findall(r'Бесплатно', text)
         if price_event[0] == 'Бесплатно':
-            price = 0
+            price = '0'
+        else:
+            price = 'Стоимость указана при регистрации'
         print(price)
 
         if attachments := request.json['object'].get('attachments'):
