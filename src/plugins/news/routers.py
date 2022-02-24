@@ -51,7 +51,7 @@ def load_news_from_vk():
         text_name = re.findall(r'([А-Я]{2,}\s)', text)
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
         text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
-        if (text_name != '' or text_name1 != ' ' or text_name2 != ' '):
+        if (text_name != ' ' or text_name1 != ' ' or text_name2 != ' '):
             if (text_name2 != ' '):
                 name = text_name2
             elif (text_name1 != ' '):
