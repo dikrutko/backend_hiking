@@ -48,35 +48,43 @@ def load_news_from_vk():
         picture =""
         # Парсим информацию 
         # Достаем название
+        text_name = re.findall(r'([А-Я]{2,}\s)', text)
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
         text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
-        if (text_name1 != ' ' or text_name2 != ' '):
-            if (text_name1 != ' '):
-                name = text_name1
-            elif (text_name2 != ' '):
+        if (text_name != '' or text_name1 != ' ' or text_name2 != ' '):
+            if (text_name2 != ' '):
                 name = text_name2
+            elif (text_name1 != ' '):
+                name = text_name1
+            elif (text_name != ' '):
+                name = text_name
             name = name[0]
         #name = text.split('\n')[0]
         
         # Достаем дату и время
         date_event = re.findall(r'\d{1,}\s\w+\s.\s\w+',text)
-        date_split = date_event[0].split()
-        day = date_split[0]
-        mounth = date_split[1]
-        moun = {
-            "янв": '01',
-            "фев": '02',
-            "мар": '03',
-            "апр": '04',
-            "мая": '05',
-            "июн": '06',
-            "июл": '07',
-            "авг": '08',
-            "сен": '09',
-            "окт": '10',
-            "ноя": '11',
-            "дек": '12'
-        }[mounth[:3]]
+        date_event1 = re.findall(r'\d{1,}\.\d{1,}\s.\s\w+', text)
+        if date_event != '':
+            date_split = date_event[0].split()
+            day = date_split[0]
+            moun = {
+                "янв": '01',
+                "фев": '02',
+                "мар": '03',
+                "апр": '04',
+                "мая": '05',
+                "июн": '06',
+                "июл": '07',
+                "авг": '08',
+                "сен": '09',
+                "окт": '10',
+                "ноя": '11',
+                "дек": '12'
+            }[mounth[:3]]
+        elif date_event1 != '':
+            date_split = date_event1[0].split()
+            day = date_split[0]
+            mounth = date_split[1] 
         year = datetime.now().year
         time_event = re.findall(r'\d{2}\:\d{2}', text)
         time = time_event[0]
