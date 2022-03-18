@@ -11,3 +11,8 @@ class Area(BaseModel):
     description = peewee.TextField()
     point = peewee.ForeignKeyField(Point, backref='area')
     picture = peewee.TextField()
+
+__all__ = [
+    Point,
+    Area,
+]
