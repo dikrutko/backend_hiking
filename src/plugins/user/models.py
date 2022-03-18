@@ -10,14 +10,3 @@ class User(BaseModel):
     password = peewee.CharField()
     photo = peewee.TextField()
     active = peewee.BooleanField(default=False)
-
-
-class CodeActications(BaseModel):
-    user = peewee.ForeignKeyField(User, backref='code', unique=True)
-    code = peewee.CharField(max_length=4)
-
-
-__all__ = [
-    'User',
-    'CodeActications',
-]

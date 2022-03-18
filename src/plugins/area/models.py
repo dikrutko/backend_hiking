@@ -2,9 +2,12 @@ import peewee
 from plugins.core.base_model import BaseModel
 
 
+class Point(BaseModel):
+    latitude = peewee.DoubleField()
+    longitude = peewee.DoubleField()
+
 class Area(BaseModel):
     name = peewee.CharField(index=True)
     description = peewee.TextField()
-    latitude = peewee.DoubleField()
-    longitude = peewee.DoubleField()
+    point = peewee.ForeignKeyField(Point, backref='area')
     picture = peewee.TextField()

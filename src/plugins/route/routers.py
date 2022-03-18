@@ -8,7 +8,7 @@ manager = PluginManager(None)
 @manager.route('/routes', methods=['GET'])
 def get_routes():
     """Получение всех маршрутов"""
-    return convert_all_object_to_json(Route, exclude=[Route.area])
+    return convert_all_object_to_json(Route, exclude=[Route.area, Route.points])
 
 @manager.route('/routes/<pk>')
 def get_detail_routes(pk):

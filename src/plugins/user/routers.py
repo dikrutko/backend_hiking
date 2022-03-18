@@ -14,23 +14,6 @@ from os import getenv
 manager = PluginManager(None)
 
 
-def send_code(user):
-    code = ''.join(choices(digits, k=4))
-    CodeActications.create(user=user, code=code)
-    url = '/'.join(request.url.split('/')[:3])
-    text = f'Пожалуйста, подтвердите вашу почту: {url}/activations/{code}'
-    
-    send = post(
-        f'https://api.mailgun.net/v3/{getenv("MAILGUN_MAIL").split("@")[1]}/messages',
-        auth=("api", getenv('MAILGUN_API_KEY')),
-        data={"from": f"Hiking <{getenv('MAILGUN_MAIL')}>",
-              "to": [user.email],
-              "subject": 'Подверждение почты',
-              "text": text}
-    )
-    print(send.text)
-
-
 @manager.route('/login', methods=['POST'])
 def login():
     json = request.json # пароль и email
@@ -40,9 +23,6 @@ def login():
         return jsonify({'error': 'Неправильный логин или пароль'})
     if user.password != md5(json['password'].encode()).hexdigest():
         return jsonify({'error': 'Неправильный логин или пароль'})
-    #if not user.active:
-     #   return jsonify({'error': 'Подтвердите почту'}) 
-
     return model_to_dict(user, backrefs=True)
 
 
@@ -56,7 +36,6 @@ def get_users():
 def add_users():
     """Создание нового пользователя из json"""
     json = request.json
-    json['active'] = False
 
     if json.get('password', '') != json.pop('check_password'):
         return jsonify({'error': 'Пароли не совпадают'})
@@ -72,14 +51,3 @@ def add_users():
     send_code(user)
     
     return result
-
-
-@manager.route('/activations/<code>', methods=['GET'])
-def activate(code):
-    try:
-        code = CodeActications.get(CodeActications.code==code)
-    except DoesNotExist:
-        return jsonify({'error': 'Код не найден'})
-    code.user.active = True
-    code.user.save()
-    return jsonify({'good': 'Вы успешно подтердили почту'})
