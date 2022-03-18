@@ -1,5 +1,5 @@
 from utils import convert_all_object_to_json, create_object_from_json
-from plugins.user.models import User, CodeActications
+from plugins.user.models import User
 from flask import request, jsonify
 from plugins.core.plugin_manager import PluginManager
 from hashlib import md5
