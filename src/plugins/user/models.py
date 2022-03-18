@@ -9,4 +9,3 @@ class User(BaseModel):
     email = peewee.CharField(index=True)
     password = peewee.CharField()
     photo = peewee.TextField()
-    active = peewee.BooleanField(default=False)
