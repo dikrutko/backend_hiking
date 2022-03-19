@@ -13,5 +13,5 @@ class Route(BaseModel):
     link_on_youTube = peewee.CharField()
     color_route = peewee.CharField(index=True)
     area = peewee.ForeignKeyField(Area, backref='routes')
-    point = peewee.ManyToManyField(Point, backref='routes')
+    points = peewee.ManyToManyField(Point, backref='routes')
     picture = peewee.TextField()
