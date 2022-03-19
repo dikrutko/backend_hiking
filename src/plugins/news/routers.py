@@ -94,7 +94,7 @@ def load_news_from_vk():
         _datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
 
         # Описание
-        if text.split('\n')[2] = "Завтра! Вечерний поход на Вторую Сопку Гремячей Гривы!":
+        if text.split('\n')[2] == "Завтра! Вечерний поход на Вторую Сопку Гремячей Гривы!":
             description = text.split('\n')[7] + '\n' + text.split('\n')[9] + '\n' + text.split('\n')[11]
         else:
             description = text.split('\n')[5] + '\n' + text.split('\n')[7] + '\n' + text.split('\n')[9]
