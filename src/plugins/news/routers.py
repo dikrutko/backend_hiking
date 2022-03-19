@@ -48,7 +48,9 @@ def load_news_from_vk():
         picture =""
         # Парсим информацию 
         # Достаем название
-        text_name = re.findall(r'([А-Я]{2,}\s)', text)
+        text_name = text.split('\n')[0]
+        name = re.findall(r'(([А-Я]{2,}\s){1,})', text_name)
+        """ text_name = re.findall(r'([А-Я]{2,}\s)', text)
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
         text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
         if (text_name != ' ' or text_name1 != ' ' or text_name2 != ' '):
@@ -58,12 +60,13 @@ def load_news_from_vk():
                 name = text_name1
             elif (text_name != ' '):
                 name = text_name
-            name = name[0]
+            name = name[0] """
         #name = text.split('\n')[0]
         
         # Достаем дату и время
-        date_event = re.findall(r'\d{1,}\s\w+\s.\s\w+',text)
-        date_event1 = re.findall(r'\d{1,}\.\d{1,}\s.\s\w+', text)
+        #date_event = re.findall(r'\d{1,}\s\w+\s.\s\w+',text)
+        date_event = re.findall(r'\d{1,}\s[а-я]{2,}\s.\s[а-я]{2,}',text)
+        date_event1 = re.findall(r'\d{1,}\.\d{1,}\s.\s[а-я]{2,}', text)
         if date_event != '':
             date_split = date_event[0].split()
             day = date_split[0]
@@ -86,12 +89,15 @@ def load_news_from_vk():
             day = date_split[0]
             mounth = date_split[1] 
         year = datetime.now().year
-        time_event = re.findall(r'\d{2}\:\d{2}', text)
-        time = time_event[0]
+        time_event = re.findall(r'Начало\sв\s\d{2}\:\d{2}', text)
+        time = time_event[2]
         _datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
 
         # Описание
-        description = text.split('\n')[5] + '\n' + text.split('\n')[7]
+        if text.split('\n')[2] = "Завтра! Вечерний поход на Вторую Сопку Гремячей Гривы!":
+            description = text.split('\n')[7] + '\n' + text.split('\n')[9] + '\n' + text.split('\n')[11]
+        else:
+            description = text.split('\n')[5] + '\n' + text.split('\n')[7] + '\n' + text.split('\n')[9]
 
         # Длину маршрута (протяженность), км
         lenght_event = re.findall(r'[пП]ротяж[её]нность\W{1,3}\d+', text)
@@ -100,8 +106,13 @@ def load_news_from_vk():
 
         # Продолжительность, ч
         lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
-        len_time_num = re.findall(r'\d+', lenght_time_event[0])
-        lenght_time = len_time_num[0]
+        lenght_time_event1 = re.findall(r'[пП]родолжительность\sвосхождения\W{1,3}\d+', text)
+        if lenght_time_event != '':
+            len_time_num = re.findall(r'\d+', lenght_time_event[0])
+            lenght_time = len_time_num[0]
+        if lenght_time_event1 != '':
+            len_time_num = re.findall(r'\d+', lenght_time_event1[0])
+            lenght_time = len_time_num[0]
 
         # Ссылку на регистриацию
         link_event = re.findall(r'https://\S+', text)
