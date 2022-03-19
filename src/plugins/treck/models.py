@@ -6,4 +6,4 @@ class Treck(BaseModel):
     min_hight = peewee.DoubleField()
     max_hoght = peewee.DoubleField()
     color = peewee.CharField()
-    points = peewee.ManuToManyField(Point, backref='treck')
+    points = peewee.ManyToManyField(Point, backref='treck')
