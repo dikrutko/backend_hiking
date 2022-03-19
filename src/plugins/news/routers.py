@@ -2,15 +2,15 @@ from plugins.news.models import News
 from flask import request, jsonify
 from plugins.core.plugin_manager import PluginManager
 import re
-from scripts.parser_coords_on_map import pars_coords
+#from scripts.parser_coords_on_map import pars_coords
 from datetime import datetime
 from utils import convert_all_object_to_json, create_object_from_json
 
 manager = PluginManager(None)
 
-@manager.route('/coords/<name>', methods=['GET'])
+""" @manager.route('/coords/<name>', methods=['GET'])
 def get_coords_from_map(name):
-    return pars_coords(name)
+    return pars_coords(name) """
 
 @manager.route('/news', methods=['GET'])
 def get_news():
