@@ -4,6 +4,6 @@ from plugins.area.models import Point
 
 class Treck(BaseModel):
     min_hight = peewee.DoubleField()
-    max_hoght = peewee.DoubleField()
-    color = peewee.CharField()
+    max_hight = peewee.DoubleField()
+    lenght = peewee.DoubleField()
     points = peewee.ManyToManyField(Point, backref='treck')
