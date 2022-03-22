@@ -292,6 +292,7 @@ fway = Deikstra(st,en)
 # lat = fway[1::3]
 # lon = fway[0::3]
 
+<<<<<<< HEAD
 # # для строки без []
 # strlat = str(lat)[1:]
 # strlat = strlat[:-1]
@@ -301,3 +302,10 @@ fway = Deikstra(st,en)
 file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
 file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
 file1.close() """
+=======
+    # для строки без []
+    strlat = str(lat)[1:]
+    strlat = strlat[:-1]
+    strlon = str(lon)[1:]
+    strlon = strlon[:-1]
+>>>>>>> 8d6d16212bf0c83fd8e3d6631a7d59470fae782f
