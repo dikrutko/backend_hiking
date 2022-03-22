@@ -269,32 +269,34 @@ for a in range(0, len(vocab)):
         else:
             distances.get(fin).update({xcold: weight})
 
-for i in range(0, len(vocab)):
-    coordpl = vocab[name[i]]
-    xpl = coordpl[1::3]
-    ypl = coordpl[0::3]
-    for k in [0,len(xpl)-1]:
-        if (ypl[k],xpl[k]) not in nodes:
-            nodes.append((ypl[k],xpl[k]))  
-fway = Deikstra(st,en)
+ 
+if __name__ == '__main__':
+    for i in range(0, len(vocab)):
+        coordpl = vocab[name[i]]
+        xpl = coordpl[1::3]
+        ypl = coordpl[0::3]
+        for k in [0,len(xpl)-1]:
+            if (ypl[k],xpl[k]) not in nodes:
+                nodes.append((ypl[k],xpl[k]))  
+    fway = Deikstra(st,en)
 
 
-# для вывода инфы о построенном маршруте
-lenght, max_tr, min_tr = lenforfway(fway, 0, int(len(fway)/3)-1)
-print("Min = ", min_tr)
-print("Max = ", max_tr)
-print("len = ", lenght)
+    # для вывода инфы о построенном маршруте
+    lenght, max_tr, min_tr = lenforfway(fway, 0, int(len(fway)/3)-1)
+    print("Min = ", min_tr)
+    print("Max = ", max_tr)
+    print("len = ", lenght)
 
-#for android studio
-lat = fway[1::3]
-lon = fway[0::3]
+    #for android studio
+    lat = fway[1::3]
+    lon = fway[0::3]
 
-# для строки без []
-strlat = str(lat)[1:]
-strlat = strlat[:-1]
-strlon = str(lon)[1:]
-strlon = strlon[:-1]
-""" file1 = open("treck.kt", "w")
-file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
-file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
-file1.close() """
+    # для строки без []
+    strlat = str(lat)[1:]
+    strlat = strlat[:-1]
+    strlon = str(lon)[1:]
+    strlon = strlon[:-1]
+        """ file1 = open("treck.kt", "w")
+    file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
+    file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
+    file1.close() """
