@@ -1,5 +1,5 @@
-from .vocab_base import vocab
-from .vocab_color import colorrgb
+from vocab_base import vocab
+from vocab_color import colorrgb
 import math
 import random
 rad = 6372795  # rad - радиус сферы (Земли)
@@ -117,6 +117,108 @@ def vstavka(spisok, new, index):
             vocab[name[k]]=cash   
 
 def Deikstra(current, en):
+    point = [current,en]
+    for i in range(len(vocab)):
+        if (current[0] == vocab[name[i]][0] and current[1] == vocab[name[i]][1]) or (current[0] == vocab[name[i]][len(vocab[name[i]])-3] and current[1] == vocab[name[i]][len(vocab[name[i]])-2]):
+            point.remove(current)
+        if (en[0] == vocab[name[i]][0] and en[1] == vocab[name[i]][1]) or (en[0] == vocab[name[i]][len(vocab[name[i]])-3] and en[1] == vocab[name[i]][len(vocab[name[i]])-2]):
+            point.remove(en)
+
+    for a in range(0, len(vocab)):  
+        coordA = vocab[name[a]]
+        x1 = coordA[1::3]
+        y1 = coordA[0::3]
+        z1 = coordA[2::3]
+        cdots = []
+        fin = (y1[len(x1)-1],x1[len(x1)-1])
+        for b in range(0, len(vocab)):
+            if (b != a):
+                coordB = vocab[name[b]]
+                x2 = coordB[1::3]
+                y2 = coordB[0::3]
+                z2 = coordB[2::3]
+                min_dist = 50
+                index[a] = -1 
+                index[b] = -1              
+                for i in range(0, len(x1)):
+                    for j in range(0, len(x2)):
+                        dist = meters(x1[i], y1[i], x2[j], y2[j])
+                        if (dist < min_dist):
+                            min_dist = dist
+                            index[a] = i
+                            index[b] = j
+                if index[a] != -1:
+                    xcros = round((x1[index[a]]+x2[index[b]])/2,6)  
+                    ycros = round((y1[index[a]]+y2[index[b]])/2,6)
+                    zcros = round((z1[index[a]]+z2[index[b]])/2,6)
+                    if (ycros,xcros) not in cdots:
+                        vstavka([a,b],[ycros,xcros,zcros],index)
+                        cdots.append((ycros,xcros))
+                    if (ycros,xcros) not in nodes:
+                        nodes.append((ycros,xcros))
+        if point != []:                
+            for v in point:
+                min_dist = 50
+                ind = -1 
+                for l in range(len(x1)):            
+                    dist = meters(x1[l], y1[l], v[1], v[0])
+                    if (dist < min_dist):
+                        min_dist = dist
+                        ind = l
+                if ind != -1:
+                    if (y1[ind], x1[ind]) not in cdots:
+                        cdots.append((y1[ind], x1[ind]))
+                    if (y1[ind], x1[ind]) not in nodes:
+                        nodes.append((y1[ind], x1[ind]))
+                        if v == current:
+                            current = (y1[ind], x1[ind])
+                        elif v == en: 
+                            en = (y1[ind], x1[ind])    
+
+        xcold = (vocab[name[a]][0],vocab[name[a]][1])
+        if xcold in cdots:
+            cdots.remove(xcold) 
+        if cdots != []:  
+            while True:
+                dots = []
+                for s in cdots:
+                    weight = lenfor(a, vocab[name[a]][1::3].index(xcold[1]), vocab[name[a]][1::3].index(s[1]))
+                    dots.append((weight,s))
+                dots = sorted(dots, key=lambda x: x[0])
+                if distances.get(xcold) is None:
+                    distances[xcold] = {dots[0][1]: dots[0][0]}
+                else:
+                    distances.get(xcold).update({dots[0][1]: dots[0][0]})
+                if distances.get(dots[0][1]) is None:
+                    distances[dots[0][1]] = {xcold: dots[0][0]}
+                else:
+                    distances.get(dots[0][1]).update({xcold: dots[0][0]})
+                xcold = dots[0][1]    
+                cdots.remove(dots[0][1])
+                if not cdots:
+                    break
+
+        if fin == xcold:
+            pass
+        else:
+            weight = lenfor(a, vocab[name[a]][1::3].index(xcold[1]), vocab[name[a]][1::3].index(fin[1]))
+            if distances.get(xcold) is None:
+                distances[xcold] = {fin: weight}
+            else:
+                distances.get(xcold).update({fin: weight})
+            if distances.get(fin) is None:
+                distances[fin] = {xcold: weight}
+            else:
+                distances.get(fin).update({xcold: weight})
+
+    for i in range(0, len(vocab)):
+        coordpl = vocab[name[i]]
+        xpl = coordpl[1::3]
+        ypl = coordpl[0::3]
+        for k in [0,len(xpl)-1]:
+            if (ypl[k],xpl[k]) not in nodes:
+                nodes.append((ypl[k],xpl[k])) 
+
     unvisited = {node: None for node in nodes}  # using None as +inf
     way = {node: '' for node in nodes}
     visited = {}
@@ -169,134 +271,33 @@ def Deikstra(current, en):
                         fway.append(coord[j])     
     return fway
 
+
 name = [*vocab]
 index = {}
 distances = {}
 nodes = []
 en = (92.866336,55.929076)
 st = (93.0707,55.9177)
-point = [st,en]
-for i in range(len(vocab)):
-    if (st[0] == vocab[name[i]][0] and st[1] == vocab[name[i]][1]) or (st[0] == vocab[name[i]][len(vocab[name[i]])-3] and st[1] == vocab[name[i]][len(vocab[name[i]])-2]):
-        point.remove(st)
-    if (en[0] == vocab[name[i]][0] and en[1] == vocab[name[i]][1]) or (en[0] == vocab[name[i]][len(vocab[name[i]])-3] and en[1] == vocab[name[i]][len(vocab[name[i]])-2]):
-        point.remove(en)
 
-for a in range(0, len(vocab)):  
-    coordA = vocab[name[a]]
-    x1 = coordA[1::3]
-    y1 = coordA[0::3]
-    z1 = coordA[2::3]
-    cdots = []
-    fin = (y1[len(x1)-1],x1[len(x1)-1])
-    for b in range(0, len(vocab)):
-        if (b != a):
-            coordB = vocab[name[b]]
-            x2 = coordB[1::3]
-            y2 = coordB[0::3]
-            z2 = coordB[2::3]
-            min_dist = 50
-            index[a] = -1 
-            index[b] = -1              
-            for i in range(0, len(x1)):
-                for j in range(0, len(x2)):
-                    dist = meters(x1[i], y1[i], x2[j], y2[j])
-                    if (dist < min_dist):
-                        min_dist = dist
-                        index[a] = i
-                        index[b] = j
-            if index[a] != -1:
-                xcros = round((x1[index[a]]+x2[index[b]])/2,6)  
-                ycros = round((y1[index[a]]+y2[index[b]])/2,6)
-                zcros = round((z1[index[a]]+z2[index[b]])/2,6)
-                if (ycros,xcros) not in cdots:
-                    vstavka([a,b],[ycros,xcros,zcros],index)
-                    cdots.append((ycros,xcros))
-                if (ycros,xcros) not in nodes:
-                    nodes.append((ycros,xcros))
-    if point != []:                
-        for v in point:
-            min_dist = 50
-            ind = -1 
-            for l in range(len(x1)):            
-                dist = meters(x1[l], y1[l], v[1], v[0])
-                if (dist < min_dist):
-                    min_dist = dist
-                    ind = l
-            if ind != -1:
-                if (y1[ind], x1[ind]) not in cdots:
-                    cdots.append((y1[ind], x1[ind]))
-                if (y1[ind], x1[ind]) not in nodes:
-                    nodes.append((y1[ind], x1[ind]))
-                    if v == st:
-                        st = (y1[ind], x1[ind])
-                    elif v == en: 
-                        en = (y1[ind], x1[ind])    
-
-    xcold = (vocab[name[a]][0],vocab[name[a]][1])
-    if xcold in cdots:
-        cdots.remove(xcold) 
-    if cdots != []:  
-        while True:
-            dots = []
-            for s in cdots:
-                weight = lenfor(a, vocab[name[a]][1::3].index(xcold[1]), vocab[name[a]][1::3].index(s[1]))
-                dots.append((weight,s))
-            dots = sorted(dots, key=lambda x: x[0])
-            if distances.get(xcold) is None:
-                distances[xcold] = {dots[0][1]: dots[0][0]}
-            else:
-                distances.get(xcold).update({dots[0][1]: dots[0][0]})
-            if distances.get(dots[0][1]) is None:
-                distances[dots[0][1]] = {xcold: dots[0][0]}
-            else:
-                distances.get(dots[0][1]).update({xcold: dots[0][0]})
-            xcold = dots[0][1]    
-            cdots.remove(dots[0][1])
-            if not cdots:
-                break
-
-    if fin == xcold:
-        pass
-    else:
-        weight = lenfor(a, vocab[name[a]][1::3].index(xcold[1]), vocab[name[a]][1::3].index(fin[1]))
-        if distances.get(xcold) is None:
-            distances[xcold] = {fin: weight}
-        else:
-            distances.get(xcold).update({fin: weight})
-        if distances.get(fin) is None:
-            distances[fin] = {xcold: weight}
-        else:
-            distances.get(fin).update({xcold: weight})
-
- 
-if __name__ == '__main__':
-    for i in range(0, len(vocab)):
-        coordpl = vocab[name[i]]
-        xpl = coordpl[1::3]
-        ypl = coordpl[0::3]
-        for k in [0,len(xpl)-1]:
-            if (ypl[k],xpl[k]) not in nodes:
-                nodes.append((ypl[k],xpl[k]))  
-    fway = Deikstra(st,en)
+fway = Deikstra(st,en)
 
 
-    # для вывода инфы о построенном маршруте
-    lenght, max_tr, min_tr = lenforfway(fway, 0, int(len(fway)/3)-1)
-    print("Min = ", min_tr)
-    print("Max = ", max_tr)
-    print("len = ", lenght)
+# # для вывода инфы о построенном маршруте
+# lenght, max_tr, min_tr = lenforfway(fway, 0, int(len(fway)/3)-1)
+# print("Min = ", min_tr)
+# print("Max = ", max_tr)
+# print("len = ", lenght)
 
-    #for android studio
-    lat = fway[1::3]
-    lon = fway[0::3]
+# #for android studio
+# lat = fway[1::3]
+# lon = fway[0::3]
 
-    # для строки без []
-    strlat = str(lat)[1:]
-    strlat = strlat[:-1]
-    strlon = str(lon)[1:]
-    strlon = strlon[:-1]
-        """ file1 = open("treck.kt", "w")
-    file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
-    file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
-    file1.close() """
+# # для строки без []
+# strlat = str(lat)[1:]
+# strlat = strlat[:-1]
+# strlon = str(lon)[1:]
+# strlon = strlon[:-1]
+""" file1 = open("treck.kt", "w")
+file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
+file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
+file1.close() """
