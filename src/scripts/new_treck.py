@@ -296,7 +296,3 @@ if __name__ == '__main__':
     strlat = strlat[:-1]
     strlon = str(lon)[1:]
     strlon = strlon[:-1]
-        """ file1 = open("treck.kt", "w")
-    file1.write('val lat: Array<Double> = arrayOf(' + str(strlat) + ')\n')
-    file1.write('val lon: Array<Double> = arrayOf(' + str(strlon) + ')')
-    file1.close() """
