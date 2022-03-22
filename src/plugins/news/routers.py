@@ -70,6 +70,7 @@ def load_news_from_vk():
         if date_event != '':
             date_split = date_event[0].split()
             day = date_split[0]
+            mounth = date_split[1] 
             moun = {
                 "янв": '01',
                 "фев": '02',
