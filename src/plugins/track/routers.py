@@ -1,34 +1,34 @@
 from flask import jsonify, request
 from plugins.core.plugin_manager import PluginManager
-from plugins.treck.models import Treck
+from plugins.track.models import Track
 from utils import convert_all_object_to_json, create_object_from_json
-from scripts.new_treck import Deikstra, lenforfway
+from scripts.new_track import Deikstra, lenforfway
 
 manager = PluginManager(None)
 
-@manager.route('/trecks', methods=['GET'])
-def get_trecks():
+@manager.route('/tracks', methods=['GET'])
+def get_tracks():
     """Получение всех построенных маршрутов"""
-    return convert_all_object_to_json(Treck, exclude=[Treck.points])
+    return convert_all_object_to_json(Track, exclude=[Track.points])
 
-@manager.route('/trecks/<pk>')
-def get_detail_trecks(pk):
+@manager.route('/tracks/<pk>')
+def get_detail_tracks(pk):
     """Получение детальной информации о построенном маршруте с id = Pk"""
     return convert_all_object_to_json(
-        Treck.select().where(Treck.id == int(pk))) 
+        Track.select().where(Track.id == int(pk))) 
 
-@manager.route('/trecks', methods=['POST'])
-def add_trecks():
+@manager.route('/tracks', methods=['POST'])
+def add_tracks():
     """Создание нового маршрута из json"""
-    return create_object_from_json(Treck, request.json)
+    return create_object_from_json(Track, request.json)
 
-@manager.route('/trecks/<pk>', methods=['DELETE'])
-def del_trecks(pk):
-    Treck.delete().where(Treck.id == int(pk)).execute()
+@manager.route('/tracks/<pk>', methods=['DELETE'])
+def del_tracks(pk):
+    Track.delete().where(Track.id == int(pk)).execute()
     """Удаление построенного маршрута из json"""
     return jsonify({'status': 'deleted'})
 
-@manager.route('/trecks/calc', methods=['POST'])
+@manager.route('/tracks/calc', methods=['POST'])
 def calc_tarck():
     data = request.json
     fway = Deikstra(tuple(data['start']), tuple(data['stop']))
