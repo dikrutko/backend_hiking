@@ -3,6 +3,7 @@ from plugins.core.plugin_manager import PluginManager
 from plugins.track.models import Track
 from utils import convert_all_object_to_json, create_object_from_json
 from scripts.new_track import Deikstra, lenforfway
+from scripts.vocab_base import vocab
 
 manager = PluginManager(None)
 
