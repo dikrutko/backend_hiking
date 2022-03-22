@@ -26,3 +26,15 @@ def del_trecks(pk):
     Treck.delete().where(Treck.id == int(pk)).execute()
     """Удаление построенного маршрута из json"""
     return jsonify({'status': 'deleted'})
+
+@manager.route('/trecks/calc', methods=['POST'])
+def calc_tarck():
+    data = request.json
+    fway = Deikstra(data['start'], data['stop'])
+    lenght, max_tr, min_tr = lenforfway(fway, 0, int(len(fway) / 3) - 1)
+    return jsonify({
+        "max_tr": max_tr,
+        "lenght": lenght,
+        "min_tr": min_tr,
+        "fway": fway,
+    })
