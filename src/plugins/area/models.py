@@ -15,6 +15,6 @@ class Area(BaseModel):
 
 
 __all__ = [
-    Point,
-    Area,
+    'Point',
+    'Area',
 ]
