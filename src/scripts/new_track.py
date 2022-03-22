@@ -1,4 +1,4 @@
-from vocab_base import vocab
+from .vocab_base import vocab
 import math
 import random
 rad = 6372795  # rad - радиус сферы (Земли)
