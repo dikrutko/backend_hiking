@@ -1,5 +1,5 @@
-from vocab_base import vocab
-from vocab_color import colorrgb
+from .vocab_base import vocab
+from .vocab_color import colorrgb
 import math
 import random
 rad = 6372795  # rad - радиус сферы (Земли)
