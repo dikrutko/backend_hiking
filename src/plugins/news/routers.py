@@ -83,7 +83,7 @@ def load_news_from_vk():
                 "окт": '10',
                 "ноя": '11',
                 "дек": '12'
-            }[mounth[:3]]
+                }[mounth[:3]]
         elif date_event1 != '':
             date_split = date_event1[0].split()
             day = date_split[0]

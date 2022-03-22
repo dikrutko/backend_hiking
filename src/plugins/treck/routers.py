@@ -2,6 +2,7 @@ from flask import jsonify, request
 from plugins.core.plugin_manager import PluginManager
 from plugins.treck.models import Treck
 from utils import convert_all_object_to_json, create_object_from_json
+from scripts.new_treck import Deikstra, lenforfway
 
 manager = PluginManager(None)
 
