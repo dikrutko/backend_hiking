@@ -4,14 +4,14 @@ import codecs
 
 dict = {}
 
-fileDir = f"trecks"
+fileDir = f"tracks"
 fileExt = r".gpx"
 result = '{'
 color = []
 colorrgb = []
-for treck in os.listdir(fileDir):
-    if treck.endswith(fileExt):
-        doc = xml.dom.minidom.parse(f"trecks/{treck}")
+for track in os.listdir(fileDir):
+    if track.endswith(fileExt):
+        doc = xml.dom.minidom.parse(f"tracks/{track}")
         trk = doc.getElementsByTagName("trk")[0]
         name = trk.getElementsByTagName("name")[0]
         
