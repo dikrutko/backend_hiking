@@ -40,7 +40,7 @@ def load_news_from_vk():
     if not request.json:
         return 'hello'
     if request.json.get('type') == 'confirmation':
-        return '0b646ebd'
+        return '0d2e1b44'
     if request.json.get('type') == 'wall_post_new':
         # TODO: написать парсер
         text = request.json['object']['text']
