@@ -147,7 +147,7 @@ def load_news_from_vk():
                 datetime=_datetime,
                 description=description,
                 lenght=lenght,
-                lenght_time=lenght_time,
+                lenght_time=lenght_time[0],
                 link_on_registration = link,
                 price = price,
                 picture = picture,
