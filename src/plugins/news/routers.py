@@ -55,7 +55,7 @@ def load_news_from_vk():
         # Парсим информацию 
         # Достаем название
         text_name = text.split('\n')[0]
-        name = re.findall(r'(([А-Я]{2,}\s){1,})', text_name)
+        name = re.findall(r'([А-Я]{2,}\s){1,}', text_name)
         """ text_name = re.findall(r'([А-Я]{2,}\s)', text)
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
         text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
