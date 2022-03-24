@@ -54,7 +54,7 @@ def load_news_from_vk():
         picture =""
         # Парсим информацию 
         # Достаем название
-        text_name = text.split('\n')[0]
+        """ text_name = text.split('\n')[0]
         #name = re.findall(r'([А-Я]{2,}\s){1,}[А-Я]{2,}', text_name)
         text_name = re.findall(r'([А-Я]{2,}\s)', str(text_name))
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,})', str(text_name))
@@ -66,8 +66,8 @@ def load_news_from_vk():
                 name = text_name1
             elif (text_name != ''):
                 name = text_name
-            name = name
-        #name = text.split('\n')[0]
+            name = name """
+        name = text.split('\n')[0]
         
         # Достаем дату и время
         #date_event = re.findall(r'\d{1,}\s\w+\s.\s\w+',text)
