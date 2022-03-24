@@ -40,7 +40,7 @@ def load_news_from_vk():
     if not request.json:
         return 'hello'
     if request.json.get('type') == 'confirmation':
-        return '0d2e1b44'
+        return '2cf868bb'
     if request.json.get('type') == 'wall_post_new':
         # TODO: написать парсер
         text = request.json['object']['text']
@@ -117,7 +117,7 @@ def load_news_from_vk():
         lenght_time_event1 = re.findall(r'[пП]родолжительность\sвосхождения\W{1,3}\d+', text)
         if lenght_time_event1 != '':
             len_time_num = re.findall(r'\d+', str(lenght_time_event1))
-            lenght_time = len_time_num
+            lenght_time = len_time_num[0]
         if lenght_time_event != '':
             len_time_num = re.findall(r'\d+', str(lenght_time_event))
             lenght_time = len_time_num[0]
