@@ -141,7 +141,7 @@ def load_news_from_vk():
                     if size['type'] != 'x':
                         continue
                     picture = size['url']
-        if name and _datetime and description and lenght and lenght_time_event and lenght_time_event1 and link and price and picture:
+        if name and _datetime and description and lenght and link and price and picture:
             News(
                 name=name,
                 datetime=_datetime,
