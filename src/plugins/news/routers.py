@@ -116,11 +116,9 @@ def load_news_from_vk():
         lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
         lenght_time_event1 = re.findall(r'[пП]родолжительность\sвосхождения\W{1,3}\d+', text)
         if lenght_time_event1 != '':
-            len_time_num = re.findall(r'\d+', str(lenght_time_event1))
-            lenght_time = len_time_num[1]
+            lenght_time = re.findall(r'\d+', str(lenght_time_event1))
         if lenght_time_event != '':
-            len_time_num = re.findall(r'\d+', str(lenght_time_event))
-            lenght_time = len_time_num[1]
+            lenght_time = re.findall(r'\d+', str(lenght_time_event))
         
 
         # Ссылку на регистриацию
