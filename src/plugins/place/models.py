@@ -8,7 +8,6 @@ class Place(BaseModel):
     description = peewee.TextField()
     latitude = peewee.FloatField()
     longitude = peewee.FloatField()
-    link_on_youTube = peewee.CharField()
     type_object = peewee.CharField(index=True)
     area = peewee.ForeignKeyField(Area, backref='places')
     picture = peewee.TextField()
