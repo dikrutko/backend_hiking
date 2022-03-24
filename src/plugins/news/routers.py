@@ -66,7 +66,7 @@ def load_news_from_vk():
                 name = text_name1
             elif (text_name != ''):
                 name = text_name
-            name = name[0]
+            name = name
         #name = text.split('\n')[0]
         
         # Достаем дату и время
