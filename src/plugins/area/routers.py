@@ -16,7 +16,7 @@ def get_areas():
 @manager.route('/areas', methods=['POST'])
 def add_areas():
     """Создание нового района из json"""
-    return create_object_from_json(Area, request.json)
+    return create_object_from_json(Area, request.json, Point, request.json)
 
 
 @manager.route('/areas/<pk>', methods=['DELETE'])
