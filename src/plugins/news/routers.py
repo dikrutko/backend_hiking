@@ -97,7 +97,7 @@ def load_news_from_vk():
             mounth = date_split[1] 
         year = datetime.now().year
         time_event = re.findall(r'Начало\sв\s\d{2}\:\d{2}', text)
-        time_ev = re.findall(r'\в\s\d{2}', time_event)
+        time_ev = re.findall(r'в\s\d{2}', time_event)
         time_e = time_ev[0].split()
         time = time_e[1]
         _datetime = str(year)+'-'+str(moun)+'-'+str(day)+' '+str(time)+':00'
