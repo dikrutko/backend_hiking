@@ -105,7 +105,7 @@ def load_news_from_vk():
         if text.split('\n')[2] == "Завтра! Вечерний поход на Вторую Сопку Гремячей Гривы!":
             description = text.split('\n')[7] + '\n' + text.split('\n')[9] + '\n' + text.split('\n')[11]
         else:
-            description = text.split('\n')[5] + '\n' + text.split('\n')[7] + '\n' + text.split('\n')[9]
+            description = text.split('\n')[5]
 
         # Длину маршрута (протяженность), км
         lenght_event = re.findall(r'[пП]ротяж[её]нность\W{1,3}\d+', text)
