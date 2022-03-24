@@ -5,6 +5,7 @@ from models.route import Route
 from models.team import Team
 from models.place import Place
 from models.treck import Treck
+from models.point import Point
  
 
 
@@ -16,5 +17,6 @@ db.create_tables([
     Place,
     Team,
     Treck,
-    User,
+    User, 
+    Point,
 ])
