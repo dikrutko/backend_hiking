@@ -1,5 +1,5 @@
 from utils import convert_all_object_to_json, create_object_from_json
-from plugins.area.models import Area
+from plugins.area.models import Area, Point
 from flask import request, jsonify
 from plugins.core.plugin_manager import PluginManager
 
@@ -16,7 +16,7 @@ def get_areas():
 @manager.route('/areas', methods=['POST'])
 def add_areas():
     """Создание нового района из json"""
-    return create_object_from_json(Area, request.json, Point, request.json)
+    return create_object_from_json(Area, request.json)
 
 
 @manager.route('/areas/<pk>', methods=['DELETE'])
