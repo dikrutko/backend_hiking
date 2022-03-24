@@ -1,11 +1,12 @@
 import peewee
 from plugins.core.base_model import BaseModel
+from plugins.point.models import Point
 
 
-class Point(BaseModel):
+""" class Point(BaseModel):
     latitude = peewee.DoubleField()
     longitude = peewee.DoubleField()
-
+ """
 
 class Area(BaseModel):
     name = peewee.CharField(index=True)
