@@ -1,6 +1,7 @@
 import peewee
 from plugins.core.base_model import BaseModel
-from plugins.area.models import Area, Point
+from plugins.area.models import Area
+from plugins.point.models import Point
 
 
 class Route(BaseModel):
@@ -13,5 +14,6 @@ class Route(BaseModel):
     link_on_youTube = peewee.CharField()
     color_route = peewee.CharField(index=True)
     area = peewee.ForeignKeyField(Area, backref='routes')
-    points = peewee.ManyToManyField(Point, backref='routes')
+    points = peewee.ForeignKeyField(Point, backref='routes')
+    #points = peewee.ManyToManyField(Point, backref='routes')
     picture = peewee.TextField()
