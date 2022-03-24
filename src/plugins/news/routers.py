@@ -118,7 +118,7 @@ def load_news_from_vk():
         if lenght_time_event1 != '':
             len_time_num = re.findall(r'\d+', str(lenght_time_event1))
             lenght_time = len_time_num
-        elif lenght_time_event != '':
+        if lenght_time_event != '':
             len_time_num = re.findall(r'\d+', str(lenght_time_event))
             lenght_time = len_time_num[0]
         
