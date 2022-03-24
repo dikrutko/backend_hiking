@@ -115,10 +115,10 @@ def load_news_from_vk():
         # Продолжительность, ч
         lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
         lenght_time_event1 = re.findall(r'[пП]родолжительность\sвосхождения\W{1,3}\d+', text)
-        #if lenght_time_event1 != '':
-        #    lenght_time = re.findall(r'\d+', lenght_time_event1[0])
-        #if lenght_time_event != '':
-        #    lenght_time = re.findall(r'\d+', lenght_time_event[0])
+        if lenght_time_event1 != []:
+            lenght_time = re.findall(r'\d+', lenght_time_event1[0])
+        if lenght_time_event != []:
+            lenght_time = re.findall(r'\d+', lenght_time_event[0])
         
 
         # Ссылку на регистриацию
@@ -141,13 +141,13 @@ def load_news_from_vk():
                     if size['type'] != 'x':
                         continue
                     picture = size['url']
-        if name and _datetime and description and lenght and link and price and picture:
+        if name and _datetime and description and lenght and lenght_time and link and price and picture:
             News(
                 name=name,
                 datetime=_datetime,
                 description=description,
                 lenght=lenght,
-                lenght_time=str(lenght_time_event)+str(lenght_time_event1),#lenght_time,
+                lenght_time=lenght_time,
                 link_on_registration = link,
                 price = price,
                 picture = picture,
