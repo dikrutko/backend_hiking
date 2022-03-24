@@ -24,3 +24,23 @@ def del_areas(pk):
     Area.delete().where(Area.id == int(pk)).execute()
     """Удаление района из json"""
     return jsonify({'status': 'deleted'})
+
+
+
+@manager.route('/points', methods=['GET'])
+def get_points():
+    """Получение всех районов"""
+    return convert_all_object_to_json(Point)
+
+
+@manager.route('/points', methods=['POST'])
+def add_points():
+    """Создание нового района из json"""
+    return create_object_from_json(Point, request.json)
+
+
+@manager.route('/points/<pk>', methods=['DELETE'])
+def del_points(pk):
+    Point.delete().where(Point.id == int(pk)).execute()
+    """Удаление района из json"""
+    return jsonify({'status': 'deleted'})
