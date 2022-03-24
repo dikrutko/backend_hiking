@@ -12,6 +12,12 @@ manager = PluginManager(None)
 def get_coords_from_map(name):
     return pars_coords(name) """
 
+
+@manager.route('/news', methods=['POST'])
+def add_news():
+    """Создание нового маршрута из json"""
+    return create_object_from_json(News, request.json)
+
 @manager.route('/news', methods=['GET'])
 def get_news():
     """Получение всех новостей"""
