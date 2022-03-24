@@ -55,7 +55,7 @@ def load_news_from_vk():
         # Парсим информацию 
         # Достаем название
         text_name = text.split('\n')[0]
-        name = re.findall(r'([А-Я]{2,}\s){1,}', text_name)
+        name = re.findall(r'([А-Я]{2,}\s){1,}[А-Я]{2,}', text_name)
         """ text_name = re.findall(r'([А-Я]{2,}\s)', text)
         text_name1 = re.findall(r'([А-Я]{2,}\s[А-Я]{2,}\s)', text)
         text_name2 = re.findall(r'[А-Я]{2,}\s[А-Я]{2,}\s[А-Я]{2,}', text)
@@ -116,7 +116,7 @@ def load_news_from_vk():
         lenght_time_event = re.findall(r'[пП]родолжительность\W{1,3}\d+', text)
         lenght_time_event1 = re.findall(r'[пП]родолжительность\sвосхождения\W{1,3}\d+', text)
         if lenght_time_event != '':
-            len_time_num = str(re.findall(r'\d+', str(lenght_time_event)))
+            len_time_num = re.findall(r'\d+', str(lenght_time_event))
             lenght_time = len_time_num[0]
         elif lenght_time_event1 != '':
             len_time_num = re.findall(r'\d+', str(lenght_time_event1))
